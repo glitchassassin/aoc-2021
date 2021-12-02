@@ -1,5 +1,7 @@
 import fs from 'fs';
 
+// https://adventofcode.com/2021/day/1
+
 let increased = 0;
 let previous = undefined;
 let total = 0;
