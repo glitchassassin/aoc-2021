@@ -29,6 +29,8 @@ export class Cell<T> {
 export class Grid<T> {
     constructor(public _grid: T[][] = []) { }
 
+    _cells: Map<string, Cell<T>> = new Map()
+
     /**
      * Gets a cell from the grid
      * @param x 
@@ -44,7 +46,8 @@ export class Grid<T> {
         ) {
             return undefined
         }
-        return new Cell(this, x, y)
+        this._cells.set(`${x}_${y}`, this._cells.get(`${x}_${y}`) ?? new Cell(this, x, y))
+        return this._cells.get(`${x}_${y}`)
     }
 
     /**
@@ -84,7 +87,7 @@ export class Grid<T> {
         }
         for (let y = 0; y < this._grid.length; y++) {
             for (let x = 0; x < this._grid.length; x++) {
-                yield new Cell(this, x, y)
+                yield this.get(x, y) as Cell<T>
             }
         }
     }
